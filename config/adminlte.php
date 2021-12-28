@@ -226,8 +226,9 @@ return [
 
     'menu' => [
         [
-            'text'       => 'Planos',
-            'url'        => 'admin/plans',
+            'text' => 'Planos',
+            'url' => 'admin/plans',
+            'icon' => 'fas fa-list-alt'
         ],
     ],
 
