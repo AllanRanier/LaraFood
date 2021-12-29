@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdatePlan;
 use App\Models\Plan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class PlanController extends Controller
 {
@@ -23,7 +22,6 @@ class PlanController extends Controller
     public function index()
     {
         $plans = $this->repository->paginate(10);
-        // dd($plans);
         return view('admin.pages.plans.index', [
             'plans' => $plans
         ]);
@@ -47,12 +45,7 @@ class PlanController extends Controller
      */
     public function store(StoreUpdatePlan $request)
     {
-
-        $data = $request->all();
-        $data['url'] = Str::kebab($request->name);
-        // dd($data);
-        $this->repository->create($data);
-
+        $this->repository->create($request->all());
         return redirect()->route('plans.index');
     }
 
@@ -65,9 +58,10 @@ class PlanController extends Controller
     public function show($url)
     {
         $plan = $this->repository->where('url', $url)->first();
-
+        
         if(!$plan)
             return redirect()->back();
+
         return view('admin.pages.plans.show', [
             'plan' => $plan
         ]);
