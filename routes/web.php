@@ -11,22 +11,30 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('admin')
+    ->namespace('Admin')
+    ->group(function () {
+
+        /**
+         * Routes Details Plans
+         */
+        Route::get('plans/{url}/details', 'DetailPlanController@index')->name('details.plans.index');
+
+
+        /**
+         * Routes Plans
+         */
+        Route::get('plans', 'PlanController@index')->name('plans.index');
+        Route::get('plans/create', 'PlanController@create')->name('plans.create');
+        Route::post('plans', 'PlanController@store')->name('plans.store');
+        Route::get('plans/{url}', 'PlanController@show')->name('plans.show');
+        Route::put('plans/{id}', 'PlanController@update')->name('plans.update');
+        Route::get('plans/{id}/edit', 'PlanController@edit')->name('plans.edit');
+        Route::delete('plans/{url}', 'PlanController@destroy')->name('plans.destroy');
+        Route::any('plans/search', 'PlanController@search')->name('plans.search');
+
+        /**
+         * Home Dashboard
+         */
+        Route::get('/', 'PlanController@index')->name('admin.index');
 });
-
-
-Route::get('admin', 'Admin\PlanController@index')->name('admin.index');
-
-Route::prefix('admin')->group(function () {
-    Route::get('plans', 'Admin\PlanController@index')->name('plans.index');
-    Route::get('plans/create', 'Admin\PlanController@create')->name('plans.create');
-    Route::post('plans', 'Admin\PlanController@store')->name('plans.store');
-    Route::get('plans/{url}', 'Admin\PlanController@show')->name('plans.show');
-    Route::put('plans/{id}', 'Admin\PlanController@update')->name('plans.update');
-    Route::get('plans/{id}/edit', 'Admin\PlanController@edit')->name('plans.edit');
-    Route::delete('plans/{url}', 'Admin\PlanController@destroy')->name('plans.destroy');
-    Route::any('plans/search', 'Admin\PlanController@search')->name('plans.search');
-});
-
-
