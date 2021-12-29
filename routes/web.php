@@ -19,6 +19,11 @@ Route::prefix('admin')
          * Routes Details Plans
          */
         Route::get('plans/{url}/details', 'DetailPlanController@index')->name('details.plans.index');
+        Route::get('plans/{url}/details/create', 'DetailPlanController@create')->name('details.plans.create');
+        Route::post('plans/{url}/details', 'DetailPlanController@store')->name('details.plans.store');
+        Route::get('plans/{url}/details/{idDetail}/edit', 'DetailPlanController@edit')->name('details.plans.edit');
+        Route::put('plans/{url}/details/{idDetail}', 'DetailPlanController@update')->name('details.plans.update');
+
 
 
         /**

@@ -7,9 +7,9 @@
         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
         <li class="breadcrumb-item"><a href="{{ route('plans.index') }}">Planos</a></li>
         <li class="breadcrumb-item"><a href="{{ route('plans.show', $plan->url ) }}">{{ $plan->name }}</a></li>
-        <li class="breadcrumb-item"><a class="active" href="{{ route('details.plans.index', $plan->id) }}">Planos</a></li>
+        <li class="breadcrumb-item"><a class="active" href="{{ route('details.plans.index', $plan->id) }}">Detalhes</a></li>
     </ol>
-    <h1>Detalhes do plano {{ $plan->name }} <a href="{{ route('plans.create') }}" class="btn btn-dark"><i class="fas fa-user-plus"></i></a></h1>
+    <h1>Adicionar novo detalhe ao plano {{ $plan->name }} <a href="{{ route('details.plans.create', $plan->url) }}" class="btn btn-dark"><i class="fas fa-user-plus"></i></a></h1>
 @stop
 
 @section('content')
@@ -31,9 +31,9 @@
                 <tbody>
                     @foreach ($details as $detail)
                         <tr>
-                            <td>{{ $details->name }}</td>
+                            <td>{{ $detail->name }}</td>
                             <td style="white-space: nowrap">
-                                <a href="{{ route('plans.edit', $plan->id) }}" class="btn btn-info"><i class="fas fa-user-edit"></i></a>
+                                <a href="{{ route('details.plans.edit', [$plan->url, $detail->id]) }}" class="btn btn-info"><i class="fas fa-user-edit"></i></a>
                                 <a href="{{ route('plans.show', $plan->url) }}" class="btn btn-warning">VER</a>
                             </td>
                         </tr>
