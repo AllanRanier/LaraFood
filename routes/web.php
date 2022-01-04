@@ -15,7 +15,7 @@ Route::prefix('admin')
     ->namespace('Admin')
     ->group(function () {
 
-
+        Route::any('profiles/search', 'ACL\ProfileController@search')->name('profiles.search');
         Route::resource('profiles', 'ACL\ProfileController');
 
         /**
