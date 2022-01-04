@@ -21,6 +21,7 @@
             </form>
         </div>
         <div class="card-body">
+            @include('admin.includes.alerts')
             <table class="table table-condensed">
                 <thead>
                     <th>Nome</th>
