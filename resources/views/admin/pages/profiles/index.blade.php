@@ -30,12 +30,10 @@
                 <tbody>
                     @foreach ($profiles as $profile)
                         <tr>
-                            <td>{{ $profiles->name }}</td>
-                            <td>R$ {{ number_format($profile->price, 2, ',', '.') }}</td>
+                            <td>{{ $profile->name }}</td>
                             <td style="white-space: nowrap">
-                                <a href="{{ route('details.profiles.index') }}" class="btn btn-primary"><i class="fas fa-info-circle"></i></i></a>
                                 <a href="{{ route('profiles.edit', $profile->id) }}" class="btn btn-info"><i class="fas fa-user-edit"></i></a>
-                                <a href="{{ route('profiles.show', $profile->url) }}" class="btn btn-warning"><i class="fas fa-eye"></i></a>
+                                <a href="{{ route('profiles.show', $profile->id) }}" class="btn btn-warning"><i class="fas fa-eye"></i></a>
                             </td>
                         </tr>
                     @endforeach

@@ -123,7 +123,7 @@ class PlanController extends Controller
 
         $plan->delete();
 
-        return redirect()->route('plans.index')->with('message', 'Registro deletado com sucesso.');
+        return redirect()->route('plans.index')->with('success', 'Registro deletado com sucesso.');
     }
 
     public function search(Request $request)

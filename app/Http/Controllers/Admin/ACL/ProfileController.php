@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\ACL;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdateProfile;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,8 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.profiles.create');
+
     }
 
     /**
@@ -42,9 +44,11 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUpdateProfile $request)
     {
-        //
+        $this->repository->create($request->all());
+
+        return redirect()->route('profiles.index')->with('success', 'Cadastrado com sucesso');
     }
 
     /**
@@ -55,7 +59,12 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        //
+        $profile = $this->repository->where('id', $id)->first();
+
+        if(!$profile)
+            return redirect()->back();
+
+        return view('admin.pages.profiles.show', compact('profile'));
     }
 
     /**
@@ -66,7 +75,12 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+        $profile = $this->repository->where('id', $id)->first();
+
+        if(!$profile)
+            return redirect()->back();
+
+        return view('admin.pages.profiles.edit', compact('profile'));
     }
 
     /**
@@ -76,9 +90,16 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUpdateProfile $request, $id)
     {
-        //
+        $profile = $this->repository->where('id', $id)->first();
+
+        if(!$profile)
+            return redirect()->back();
+
+        $profile->update($request->all());
+
+        return redirect()->route('profiles.index')->with('success', 'Atualizado com sucesso.');
     }
 
     /**
@@ -89,6 +110,14 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $profile = $this->repository->where('id', $id)->first();
+
+        if(!$profile)
+            return redirect()->back();
+
+
+        $profile->delete();
+
+        return redirect()->route('profiles.index')->with('success', 'Registro deletado com sucesso.');
     }
 }
